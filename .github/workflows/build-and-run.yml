@@ -191,4 +191,18 @@ jobs:
           ./llama-tornado --gpu --${{ matrix.backend.name }} \
             --model /$MODELS_DIR/granite-4.0-1b-Q8_0.gguf \
             --prompt "Say hello"
+      - name: Q8 - Run Gemma-3-1b-it-Q8_0.gguf (normal)
+        run: |
+          cd ${{ github.workspace }}
+          export PATH="$TORNADOVM_HOME/bin:$JAVA_HOME/bin:$PATH"
+          ./llama-tornado --gpu --${{ matrix.backend.name }} \
+            --model /$MODELS_DIR/gemma-3-1b-it-Q8_0.gguf \
+            --prompt "Say hello"
+      - name: Q8 - Run Gemma-3-1b-it-litert-Q8_0.gguf (LiteRT)
+        run: |
+          cd ${{ github.workspace }}
+          export PATH="$TORNADOVM_HOME/bin:$JAVA_HOME/bin:$PATH"
+          ./llama-tornado --gpu --${{ matrix.backend.name }} \
+            --model /$MODELS_DIR/gemma-3-1b-it-litert-Q8_0.gguf \
+            --prompt "Say hello"
 
