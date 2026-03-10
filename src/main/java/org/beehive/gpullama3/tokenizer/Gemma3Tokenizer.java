@@ -249,7 +249,7 @@ public class Gemma3Tokenizer implements Tokenizer {
         String decoded = decodeImpl(tokens);
         int[] decodedBytesAsInts = decoded.codePoints().map(BYTE_DECODER::get).toArray();
         byte[] rawBytes = new byte[decodedBytesAsInts.length];
-        for (int i = 0; i < decoded.length(); i++) {
+        for (int i = 0; i < decodedBytesAsInts.length; i++) {
             rawBytes[i] = (byte) decodedBytesAsInts[i];
         }
         return new String(rawBytes, StandardCharsets.UTF_8);
