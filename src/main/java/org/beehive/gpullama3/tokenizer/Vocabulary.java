@@ -42,6 +42,11 @@ public record Vocabulary(String[] tokens, float[] scores, Map<String, Integer> t
         return new Vocabulary(tokens, scores);
     }
 
+    public static Vocabulary loadGemma3Vocabulary(Map<String, Object> metadata) {
+        String[] tokens = (String[]) metadata.get("tokenizer.ggml.tokens");
+        return new Vocabulary(tokens, null);
+    }
+
     public String get(int tokenIndex) {
         return tokens[tokenIndex];
     }
