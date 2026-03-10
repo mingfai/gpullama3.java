@@ -44,8 +44,17 @@ public abstract class ModelLoader {
 
     private static ModelType detectModelType(Map<String, Object> metadata) {
         String name = (String) metadata.get("general.name");
+        String architecture = (String) metadata.get("general.architecture");
 
-        // Check by name first
+        // Check by architecture first — most reliable for LiteRT and other converted variants
+        if (architecture != null) {
+            String lowerArch = architecture.toLowerCase();
+            if (lowerArch.equals("gemma3") || lowerArch.equals("gemma")) {
+                return ModelType.GEMMA_3;
+            }
+        }
+
+        // Check by name
         if (name != null) {
             String lowerName = name.toLowerCase();
             if (lowerName.contains("granite")) {
